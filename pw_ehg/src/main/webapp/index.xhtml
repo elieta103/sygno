@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" />
+</h:head>
+
+<h:body>
+    <h:form id="form">
+        <p:fieldset legend="Calculadora de rendimientos">
+            <p:outputPanel id="panel" styleClass="p-mb-2">
+            <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+                <div class="ui-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="nombre">Nombre</label>
+                        <p:inputText id="nombre" type="text" required="true"
+                                     requiredMessage="Nombre es requerido"
+                                     value="#{formulario.name}"/>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="apellidos">Apellidos</label>
+                        <p:inputText id="apellidos" type="text" required="true"
+                                     requiredMessage="Apellidos es requerido"
+                                     value="#{formulario.apellidos}" />
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="email">Correo</label>
+                        <p:inputText id="email" required="true" label="email"
+                                     requiredMessage="Email es requerido"
+                                     validatorMessage="Formato de email invalido"
+                                     value="#{formulario.correo}">
+                            <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        </p:inputText>
+
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="monto">Monto</label>
+                        <p:inputText id="monto" required="true" value="#{formulario.monto}"
+                                     requiredMessage="Monto es requerido"
+                                     validatorMessage="El rango del monto es  : [300,10000]">
+                            <f:validateDoubleRange minimum="300" maximum="10000" />
+                        </p:inputText>
+
+                    </div>
+                    <div class="p-field p-col-12 p-md-6">
+                        <label for="plazo">Plazo</label>
+                        <p:selectOneMenu id="plazo" value="#{formulario.opcionAnios}"
+                                         required="true" requiredMessage="El plazo es requerido.">
+                            <f:selectItem itemLabel="Select ..." itemValue="#{null}" noSelectionOption="true" />
+                            <f:selectItem itemLabel="1 año(s)" itemValue="12-9-8" />
+                            <f:selectItem itemLabel="2 año(s)" itemValue="24-8.3-7.8" />
+                            <f:selectItem itemLabel="3 año(s)" itemValue="36-7-6" />
+                            <f:selectItem itemLabel="5 año(s)" itemValue="60-6.5-5" />
+                        </p:selectOneMenu>
+                    </div>
+                </div>
+
+                <p:commandButton value="Limpiar" action="#{formulario.reset}" immediate="true"
+                                 ajax="false" styleClass="p-mr-2 ui-button-outlined">
+                    <p:resetInput target="panel"/>
+                </p:commandButton>
+                <p:commandButton id="s" value="Enviar" type="submit" ajax="false"
+                                 action="#{formulario.submitAnswer}" process="@this"
+                                 styleClass="p-mr-2 ui-button-outlined"/>
+
+            </p:outputPanel>
+        </p:fieldset>
+    </h:form>
+</h:body>
+</html>

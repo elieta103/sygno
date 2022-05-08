@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <h:outputStylesheet library="webjars" name="primeflex/2.0.0/primeflex.min.css" />
+</h:head>
+
+<h:body>
+
+    <h:form>
+        <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+        <p:fieldset legend="Tabla de rendimientos">
+            <div class="card">
+                <p:dataTable var="item" value="#{tabla.tablaResumen.items}">
+                    <p:column headerText="Mes">
+                        <h:outputText value="#{item.noMes}" />
+                    </p:column>
+
+                    <p:column headerText="Monto Inicial">
+                        <h:outputText value="#{item.montoInicial}" />
+                    </p:column>
+
+                    <p:column headerText="Monto por Rendimiento">
+                        <h:outputText value="#{item.montoPorRend}" />
+                    </p:column>
+
+                    <p:column headerText="Monto Final">
+                        <h:outputText value="#{item.montoFinal}" />
+                    </p:column>
+                </p:dataTable>
+            </div>
+
+        </p:fieldset>
+        <p:fieldset legend="Resumen">
+            <div class="card">
+
+            <div class="ui-fluid p-formgrid p-grid">
+                <div class="p-field p-col-12 p-md-6">
+                    <label for="montoNeto">Monto neto a pagar : </label>
+                    <h:outputText value="#{tabla.tablaResumen.montoNetoPagar}" />
+
+
+                    <p:commandButton value="Enviar mensaje" type="button" onclick="alert('Felicidades se ha enviado el correo!');"/>
+
+
+                </div>
+            </div>
+
+            </div>
+        </p:fieldset>
+
+    </h:form>
+</h:body>
+</html>
